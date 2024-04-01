@@ -1,0 +1,17 @@
+
+
+.image-up-down {
+  position: relative;
+  animation: up-down 2s infinite ease;
+}
+@keyframes up-down {
+  0%,
+  100% {
+    transform: translateY(-8px);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
