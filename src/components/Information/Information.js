@@ -1,55 +1,77 @@
-import { useReducer } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useReducer } from 'react';
+import SelectAllDr from '../DrAll/SelectAllDr';
+import DemoApp from '../DemoAppontment/DemoApp';
+
+const initialState = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  email: '',
+  dateOfBirth: '',
+  doctor: 'Dr Emily Smith', 
+  isAgree: false,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'input':
+      return { ...state, [action.field]: action.value };
+    case 'reset':
+      return initialState;
+    default:
+      return state;
+  }
+};
 
 const Information = () => {
-  const initialState = {
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-    dateOfBirth: '',
-    doctor: '',
-    isAgree: false,
-  };
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'input':
-        return { ...state, [action.field]: action.value };
-      case 'reset':
-        return initialState;
-      default:
-        return state;
-    }
-  };
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handelChange = (e) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
     dispatch({
       type: 'input',
-      field: e.target.name,
-      value: e.target.value,
+      field: name,
+      value: type === 'checkbox' ? checked : value,
     });
   };
 
-  const handelReset = () => {
-    dispatch({ type: 'reset' });
-  };
-
-  const handelSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(state);
-    return state;
+    try {
+      const response = await fetch(
+        'https://medat-api.onrender.com/api/appointments',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(state),
+        }
+      );
+      if (response.ok) {
+        console.log('Appointment scheduled successfully');
+        // Optionally, reset the form after successful submission
+        dispatch({ type: 'reset' });
+      } else {
+        console.error('Failed to schedule appointment:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error occurred while scheduling appointment:', error);
+    }
   };
-
+   const handelReset = () => {
+     dispatch({ type: 'reset' });
+   };
   return (
     <>
       <div className='container mx-auto '>
+        <DemoApp>
+          
+        </DemoApp>
         <form
           action=''
-          method='get'
-          onSubmit={handelSubmit}
+          method='POST'
+          onSubmit={handleSubmit}
           className='flex flex-col p-8 justify-center gap-y-6 border border-gray-200 mb-8 shadow'
         >
           {/* first name & last name  */}
@@ -63,7 +85,7 @@ const Information = () => {
                 type='text'
                 name='firstName'
                 value={state.firstName}
-                onChange={handelChange}
+                onChange={handleChange}
                 placeholder='First Name'
                 className='border border-gray-400 px-2 py-1 outline-none w-72'
               />
@@ -71,7 +93,7 @@ const Information = () => {
                 type='text'
                 name='lastName'
                 value={state.lastName}
-                onChange={handelChange}
+                onChange={handleChange}
                 placeholder='Last Name'
                 className='border border-gray-400 px-2 py-1 outline-none flex-1'
               />
@@ -86,7 +108,7 @@ const Information = () => {
               type='text'
               name='phone'
               value={state.phone}
-              onChange={handelChange}
+              onChange={handleChange}
               className='border border-gray-400 px-2 py-1 outline-none'
             />
           </div>
@@ -99,7 +121,7 @@ const Information = () => {
               type='text'
               name='email'
               value={state.email}
-              onChange={handelChange}
+              onChange={handleChange}
               className='border border-gray-400 px-2 py-1 outline-none'
             />
           </div>
@@ -113,7 +135,7 @@ const Information = () => {
               type='text'
               name='dateOfBirth'
               value={state.dateOfBirth}
-              onChange={handelChange}
+              onChange={handleChange}
               className='border border-gray-400 px-2 py-1 outline-none'
             />
           </div>
@@ -126,11 +148,10 @@ const Information = () => {
             <select
               name='doctor'
               value={state.doctor}
-              onChange={handelChange}
+              onChange={handleChange}
               className='outline-none border border-gray-400 flex-1 py-2 px-2'
             >
-              <option value='Dr Emily Smith'>Dr Emily Smith</option>
-              <option value='Dr James Johnson'>Dr James Johnson</option>
+              <SelectAllDr />
             </select>
           </div>
           <div className='flex flex-col justify-center gap-y-6'>
@@ -138,7 +159,7 @@ const Information = () => {
               <input
                 type='checkbox'
                 name='isAgree'
-                onChange={handelChange}
+                onChange={handleChange}
                 id='check'
                 checked={state.isAgree}
                 className='w-4 h-4'
@@ -152,7 +173,7 @@ const Information = () => {
                 type='submit' // Change from Link to button
                 className='bg-main-color py-1.5 px-3 text-body-Color rounded'
               >
-                <Link to='/appointment/confirmation'>Complete Appointment</Link>
+                Complete Appointment
               </button>
               <button
                 type='button'

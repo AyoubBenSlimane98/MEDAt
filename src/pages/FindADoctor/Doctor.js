@@ -6,12 +6,13 @@ const Doctor = () => {
   const [doctors, setDoctors] = useState([]);
   const [filterDoctors, setFilterDoctors] = useState([]);
   const [valueInput, setValueInput] = useState('');
+   useEffect(() => {
 
-  useEffect(() => {
-    fetch('https://ayoube2323.github.io/dataDoctors/dataBase.json')
-      .then((res) => res.json())
-      .then((data) => setDoctors(data));
-  }, []);
+        fetch(
+           'https://medat-api.onrender.com/api/doctors'
+         ).then(res => res.json()).then(data => setDoctors(data))
+          
+   }, []);
 
   useEffect(() => {
     const flr = doctors.filter((doc) =>
@@ -38,7 +39,7 @@ const Doctor = () => {
   const handelGetId = (id) => {
     return id;
   };
-  console.log(doctors);
+
   return (
     <>
       <div className='container mx-auto py-10 border-gray-400'>
@@ -60,11 +61,11 @@ const Doctor = () => {
         <div className='container mx-auto p-8 grid grid-cols-1 gap-y-8 place-items-center sm:grid-cols-2 sm:gap-8 md:grid-cols-3 xl:grid-cols-4'>
           {filterDoctors.map((doc) => (
             <CardDoc
-              key={doc.id}
+              key={doc._id}
               name={doc.name}
               photo={doc.url}
               specialty={doc.specialty}
-              onClick={() => handelGetId(doc.id)}
+              onClick={() => handelGetId(doc._id)}
             />
           ))}
         </div>

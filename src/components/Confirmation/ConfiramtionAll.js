@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-
+import DemoApp from "../DemoAppontment/DemoApp";
 
 function ConfiramtionAll() {
   return (
     <div className='container mx-auto'>
+      <DemoApp>
+        
+      </DemoApp>
       <div className='border border-gray-200 p-6 mb-6'>
         <p>Full Name : </p>
         <p>Doctor : </p>

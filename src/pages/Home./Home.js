@@ -2,7 +2,7 @@ import logo from '../../images/medicine.png';
 // import './Home.css';
 import TitleHom from '../../components/Titles/TitleHom';
 import Db from '../../DataBase/Db';
-import video from '../../images/6130551-hd_1920_1080_30fps.mp4';
+
 import SliderActive from '../../components/sliderActive/SliderActive';
 import Clinic from '../../DataBase/ClinicDb';
 import CardCli from '../../components/CardCli/CardCli';

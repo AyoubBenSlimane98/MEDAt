@@ -12,14 +12,15 @@ const SliderActive = () => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    fetch('https://ayoube2323.github.io/dataDoctors/dataBase.json')
+    fetch('https://medat-api.onrender.com/api/doctors')
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, []);
   return (
     <div className='flex items-center  mb-20  '>
       <Swiper
-        initialSlide={3}
+        initialSlide={4}
+      
         breakpoints={{
           374: {
             slidesPerView: 1,
@@ -41,7 +42,7 @@ const SliderActive = () => {
         freeMode={true}
         centeredSlides={true}
         autoplay={{
-          delay: 3000,
+          delay: 2000,
         }}
         pagination={{
           clickable: true,
