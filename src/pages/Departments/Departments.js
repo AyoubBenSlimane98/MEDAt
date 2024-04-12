@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import CardDep from '../../components/CardDepartments/CardDep';
 
 const Departments = () => {
@@ -19,4 +19,4 @@ const Departments = () => {
   );
 };
 
-export default Departments;
+export default React.memo(Departments);

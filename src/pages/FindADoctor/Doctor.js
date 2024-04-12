@@ -74,4 +74,4 @@ const Doctor = () => {
   );
 };
 
-export default Doctor;
+export default React.memo(Doctor);
