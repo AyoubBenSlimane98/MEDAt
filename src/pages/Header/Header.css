@@ -1,0 +1,49 @@
+.move-bgcolor {
+  position: relative;
+  z-index: 1;
+  transition: color 400ms ease-in-out;
+}
+.move-bgcolor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transition: transform 1000ms ease-in-out;
+  transform-origin: left;
+  background-color: #18a3eb;
+}
+.move-bgcolor:hover::before,
+.move-bgcolor:focus::before {
+  transform: scaleX(1);
+}
+.move-bgcolor:hover,
+.move-bgcolor:focus {
+  color: #fff;
+}
+
+.icon-letf-rghit {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  font-size: 1.325rem;
+  font-weight: normal;
+  animation: left-right 1.5s infinite ease-in-out;
+  transition: transform .4s ease-in-out ;
+  cursor: pointer;
+}
+@keyframes left-right {
+  0%,
+  100% {
+    transform: translateX(0px);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  40% {
+    transform: translateX(5px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+ 
+}

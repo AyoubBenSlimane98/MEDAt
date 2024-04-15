@@ -1,24 +1,25 @@
-import React, { useReducer } from 'react';
+import React, {  useReducer } from 'react';
 import SelectAllDr from '../DrAll/SelectAllDr';
-import DemoApp from '../DemoAppontment/DemoApp';
 
-const initialState = {
-  firstName: '',
-  lastName: '',
-  phone: '',
-  email: '',
-  dateOfBirth: '',
-  doctor: 'Dr Emily Smith',
-  isAgree: false,
-  errors: {
+const Information = ({ time, date }) => {
+  const initialState = {
     firstName: '',
     lastName: '',
     phone: '',
     email: '',
     dateOfBirth: '',
-  },
-};
-
+    doctor: 'Dr Emily Smith',
+    isAgree: false,
+    time: time, 
+    date:date, 
+    errors: {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+      dateOfBirth: '',
+    },
+  };
 const reducer = (state, action) => {
   switch (action.type) {
     case 'input':
@@ -39,7 +40,6 @@ const reducer = (state, action) => {
   }
 };
 
-const Information = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleChange = (e) => {
@@ -52,12 +52,21 @@ const Information = () => {
       if (!namePattern.test(value)) {
         errorMessage = `Please enter a valid ${name} containing only letters.`;
       }
-    } else if (name === 'email') {
+    }
+    if (name === 'phone') {
+      const phonePattern = /(05|06|07)([4-9]\d{7})/;
+      if (!phonePattern.test(value)) {
+        errorMessage = 'Please enter a valid phone 05xxx or 06xxx or 07xxxx .';
+      }
+    }
+
+    if (name === 'email') {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(value)) {
         errorMessage = 'Please enter a valid email address.';
       }
-    } else if (name === 'dateOfBirth') {
+    }
+    if (name === 'dateOfBirth') {
       const dobPattern =
         /(0[1-9]|[1-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])(\/|-)(19[4-9][0-9]|20[0-1][0-9]|202[0-4])/;
       if (!dobPattern.test(value)) {
@@ -87,11 +96,13 @@ const Information = () => {
           headers: {
             'Content-Type': 'application/json',
           },
+          
           body: JSON.stringify(state),
         }
       );
       if (response.ok) {
         dispatch({ type: 'reset' });
+        console.log(state)
       }
     } catch (error) {
       console.error('Error occurred while scheduling appointment:', error);
@@ -119,20 +130,19 @@ const Information = () => {
   const handleReset = () => {
     dispatch({ type: 'reset' });
   };
-
+ 
   return (
-    <div className='container mx-auto'>
-      <DemoApp />
+    <div className=' container mx-auto p-6 flex  justify-center items-center '>
       <form
         onSubmit={handleSubmit}
-        className='flex flex-col p-8 justify-center gap-y-6 border border-gray-200 mb-8 shadow'
+        className='flex flex-col p-4 md:p-8 justify-center gap-y-6 border border-gray-200 mb-8 shadow w-full  md:w-[90%] '
       >
         {/* First name & Last name */}
-        <div className='flex-1 flex flex-col gap-y-1'>
+        <div className='flex-1 flex flex-col gap-y-2'>
           <label htmlFor='firstName'>
-            Name <span className='text-red-700'>*</span>
+            Name <span className='text-red-700 '>*</span>
           </label>
-          <div className='flex items-center justify-center gap-x-2'>
+          <div className='flex flex-col md:flex-row gap-4 items-center justify-center md:gap-x-2'>
             <input
               autoFocus
               type='text'
@@ -140,7 +150,7 @@ const Information = () => {
               value={state.firstName}
               onChange={handleChange}
               placeholder='First Name'
-              className={`border  ${state.errors.firstName? 'border-red-color':'border-gray-400'}  px-2 py-1 outline-none w-72`}
+              className={`w-full border  ${state.errors.firstName ? 'border-red-color' : 'border-gray-400'}  px-2 py-1 outline-none md:w-72`}
             />
             <input
               type='text'
@@ -148,7 +158,7 @@ const Information = () => {
               value={state.lastName}
               onChange={handleChange}
               placeholder='Last Name'
-              className={`border ${state.errors.lastName ? 'border-red-color' : 'border-gray-400'} px-2 py-1 outline-none flex-1`}
+              className={`w-full border ${state.errors.lastName ? 'border-red-color' : 'border-gray-400'} px-2 py-1 outline-none md:flex-1`}
             />
           </div>
           {state.errors.firstName && (
@@ -193,7 +203,8 @@ const Information = () => {
         {/* Date of Birth */}
         <div className='flex flex-col gap-y-2'>
           <label htmlFor='dateOfBirth'>
-            Date of Birth (DD/MM/YYYY or DD-MM-YYYY, e.g. 30/12/1960 ) <span className='text-red-700'>*</span>
+            Date of Birth (DD/MM/YYYY or DD-MM-YYYY, e.g. 30/12/1960 ){' '}
+            <span className='text-red-700'>*</span>
           </label>
           <input
             type='text'
@@ -207,7 +218,7 @@ const Information = () => {
           )}
         </div>
         {/* Referring doctor */}
-        <div className='flex items-center justify-between gap-x-6 mb-6'>
+        <div className='flex flex-col gap-y-3 md:flex-row md:items-center md:justify-between gap-x-6 mb-6'>
           <label htmlFor='doctor'>
             Name of your referring doctor{' '}
             <span className='text-red-700'>*</span>
@@ -222,7 +233,7 @@ const Information = () => {
           </select>
         </div>
         <div className='flex flex-col justify-center gap-y-6'>
-          <div className='flex items-center gap-x-2'>
+          <div className='flex items-center  justify-center  md:justify-normal gap-x-2'>
             <input
               type='checkbox'
               name='isAgree'
@@ -231,15 +242,15 @@ const Information = () => {
               checked={state.isAgree}
               className='w-4 h-4'
             />
-            <label htmlFor='check'>I have agreed to send all information</label>
+            <label htmlFor='check' className='text-nowrap text-lg'>I have agreed to send all information</label>
           </div>
           <div className='space-x-6'>
             <button
               type='submit'
-              className={`${!validateForm() ? 'bg-gray-300' : 'bg-main-color'} py-1.5 px-3 text-body-Color rounded`}
+              className={`${!validateForm() ? 'bg-gray-300' : 'bg-main-color'} py-1.5 px-4 text-body-Color rounded`}
               disabled={!validateForm()}
             >
-              Complete Appointment
+              Send
             </button>
             <button
               type='button'

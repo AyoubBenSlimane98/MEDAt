@@ -3,7 +3,7 @@ import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6';
 
 function Calendar({ onClick }) {
   const [date, setDate] = useState(new Date());
- 
+  const [selectedDay, setSelectedDay] = useState(null);
 
   const daysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate();
@@ -19,6 +19,11 @@ function Calendar({ onClick }) {
 
   const nextMonth = () => {
     setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
+  };
+
+  const handleDayClick = (day, month, year) => {
+    setSelectedDay(day);
+    onClick(day, month, year);
   };
 
   const renderCalendar = () => {
@@ -40,17 +45,17 @@ function Calendar({ onClick }) {
     }
 
     for (let day = 1; day <= daysCount; day++) {
+      const isSelected = selectedDay === day;
       calendar.push(
         <div
           key={day}
-          className='calendar-day flex items-center  justify-around  '
-          onClick={() => onClick(day, month + 1, year)}
+          className={`calendar-day flex items-center justify-around `}
+          onClick={() => handleDayClick(day, month + 1, year)}
         >
           <span
-            className={`${day < 10 ? 'px-3 py-1' : 'py-1 px-2'} 
+            className={`${day < 10 ? 'px-3 py-1' : 'py-1 px-2'} ${isSelected ? 'bg-main-color text-light-color' : ''}
              
-             duration-200 hover:bg-gray-300 rounded-full cursor-pointer`}
-            
+             duration-200 sm:hover:bg-gray-300 rounded-full cursor-pointer`}
           >
             {day}
           </span>
@@ -63,7 +68,7 @@ function Calendar({ onClick }) {
 
   return (
     <div className='w-[90%] sm:w-full max-w-lg mx-auto'>
-      <div className='bg-body-color shadow-xl  border border-gray-300 rounded-lg p-6'>
+      <div className='bg-body-color shadow-xl  border border-gray-300 rounded-lg p-4 sm:p-6'>
         <div className='flex  items-center justify-center p-2'>
           <h2 className='text-lg  flex-1 hover:bg-slate-200 px-2 py-3'>
             {date.toLocaleString('default', { month: 'long' })}{' '}

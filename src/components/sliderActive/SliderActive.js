@@ -17,10 +17,9 @@ const SliderActive = () => {
       .then((data) => setUser(data));
   }, []);
   return (
-    <div className='flex items-center  mb-20  '>
+    <div className='flex items-center  mb-6  '>
       <Swiper
         initialSlide={4}
-      
         breakpoints={{
           374: {
             slidesPerView: 1,

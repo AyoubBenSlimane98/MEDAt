@@ -5,7 +5,7 @@ function Video() {
         <div className='overlay'></div>
         <video src={videoBg} autoPlay loop muted />
         <div className='content'>
-                <h2>Welome To MEDArt</h2>
+                <h2 className='text-2xl sm:text-5xl'>Welome To MEDArt</h2>
         </div>
   </div>;
 }

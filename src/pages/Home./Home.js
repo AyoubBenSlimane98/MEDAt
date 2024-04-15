@@ -19,13 +19,13 @@ function Home() {
   ));
   return (
     <main className='container mx-auto mt-16'>
-      <div className='flex  flex-col space-x-6 px-6 md:flex-row-reverse'>
-        <div className='sm:w-screen md:w-1/2 '>
+      <div className='flex  flex-col sm:space-x-6 sm:px-6 md:flex-row-reverse'>
+        <div className=' sm:w-screen md:w-1/2 '>
           <img
             src={logo}
             alt=''
             width='w-full'
-            className='image-up-down '
+            className='image-up-down'
           />
         </div>
         <div className='md:w-1/2 flex flex-col space-y-6 justify-center py-8 '>
@@ -41,9 +41,9 @@ function Home() {
         </TitleHom>
       </div>
       <Video />
-      <div className=' py-20 '>
+      <div className='py-10 md:py-20 '>
         <TitleHom data={Db.docthree}>
-          <div className='mt-16'>
+          <div className='mt-4 '>
             <SliderActive />
           </div>
           <BtnHome title='Meet With All Doctors' />

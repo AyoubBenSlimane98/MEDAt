@@ -102,7 +102,7 @@ const Contact = () => {
   };
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto '>
       <div className='main-img mb-10'>
         <div className='overlay-img'></div>
         <img
@@ -117,7 +117,7 @@ const Contact = () => {
       <div className='flex flex-col-reverse items-center md:flex-row md:justify-around mb-10'>
         <form
           onSubmit={handleSubmit}
-          className='flex flex-col p-8 justify-center gap-y-6 border border-gray-200 mb-8 shadow w-1/2'
+          className='flex flex-col p-4 sm:p-8 justify-center gap-y-6 border border-gray-200 mb-8 shadow w-[90%] sm:w-1/2'
         >
           <div className='flex flex-col gap-y-3 '>
             <label htmlFor='firstName'>
@@ -176,9 +176,7 @@ const Contact = () => {
               value={state.message}
               onChange={handleChange}
               id='message'
-              cols='30'
-              rows='10'
-              className='outline-none border border-gray-300'
+              className='outline-none border border-gray-300 h-36 sm:h-48'
               required
             ></textarea>
             {state.errors.message && (
@@ -199,6 +197,8 @@ const Contact = () => {
             </button>
           </div>
         </form>
+        <div>
+        </div>
       </div>
     </div>
   );

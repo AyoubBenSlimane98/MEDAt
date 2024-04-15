@@ -2,10 +2,11 @@ import React from 'react';
 import IconMenu from '../../components/menuFooter/IconMenu';
 import './About.css'
 const About = () => {
+  
   return (
-    <div className='container mx-auto p-10'>
+    <div className='container mx-auto p-4 sm:p-10'>
       <div className='flex flex-col items-center '>
-        <h3 className='text-5xl text-second-color text-center mb-8'>
+        <h3 className='text-3xl sm:text-5xl text-second-color text-center mb-8'>
           About Medical Center (Group){' '}
         </h3>
         <p className=' text-justify font-normal text-lg text-gray-600 mb-12'>
@@ -58,7 +59,7 @@ const About = () => {
       </div>
       <div>
         <div className='flex flex-col items-center '>
-          <h3 className='text-5xl text-second-color text-center m-10'>
+          <h3 className='text-3xl text-nowrap sm:text-5xl text-second-color text-center m-8 sm:m-10'>
             Our Vision & Mission
           </h3>
           <p className=' text-justify font-normal text-lg text-gray-color mb-12  py-8 border-b'>

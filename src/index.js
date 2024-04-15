@@ -17,6 +17,7 @@ import Home from './pages/Home./Home';
 import Profile from './pages/profile/Profile';
 import Clinic from './pages/clinic/Clinic';
 import GetData from './components/getDataAppointment/GetData';
+
 import Information from './components/Information/Information';
 import ConfiramtionAll from '../src/components/Confirmation/ConfiramtionAll'
 const router = createBrowserRouter(
@@ -56,7 +57,7 @@ const router = createBrowserRouter(
 
       <Route
         path='/appointment'
-        element={<LayoutApp />}
+        element={ <LayoutApp />}
       >
         <Route
           index

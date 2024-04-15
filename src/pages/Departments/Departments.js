@@ -13,7 +13,7 @@ const Departments = () => {
   }, [])
  
   return (
-    <div className=' container mx-auto grid grid-cols-1 sm:grid-cols-1  md:grid-cols-2 place-items-center gap-4  p-10 '>
+    <div className=' container mx-auto grid grid-cols-1 sm:grid-cols-1  md:grid-cols-2 place-items-center gap-4 p-4 sm:p-10 '>
       {clinic.map((item) => (<CardDep key={item._id} clinic={item} />))}
     </div>
   );

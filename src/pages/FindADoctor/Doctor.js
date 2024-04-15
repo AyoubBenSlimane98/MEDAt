@@ -43,7 +43,7 @@ const Doctor = () => {
   return (
     <>
       <div className='container mx-auto py-10 border-gray-400'>
-        <div className='w-full flex justify-center'>
+        <div className='w-full flex justify-center mb-6'>
           <input
             autoFocus
             type='text'
@@ -58,7 +58,7 @@ const Doctor = () => {
             <BiSearch style={{ color: 'white', fontSize:'1.5rem'}}/>
           </button>
         </div>
-        <div className='container mx-auto p-8 grid grid-cols-1 gap-y-8 place-items-center sm:grid-cols-2 sm:gap-8 md:grid-cols-3 xl:grid-cols-4'>
+        <div className='p-2 grid grid-cols-1 gap-y-6 place-items-center sm:grid-cols-2 sm:gap-8 md:grid-cols-3 xl:grid-cols-4'>
           {filterDoctors.map((doc) => (
             <CardDoc
               key={doc._id}
