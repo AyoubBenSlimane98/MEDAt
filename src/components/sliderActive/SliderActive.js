@@ -11,8 +11,8 @@ import { Autoplay, Pagination} from 'swiper/modules';
 const SliderActive = () => {
   const [user, setUser] = useState([]);
 
-  useEffect(() => {
-    fetch('https://medat-api.onrender.com/api/doctors')
+  useEffect( () => {
+     fetch('https://medat-api.onrender.com/api/doctors')
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, []);

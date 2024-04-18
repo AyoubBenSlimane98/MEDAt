@@ -7,14 +7,16 @@ import { BsHospital } from 'react-icons/bs';
 import { SiMinutemailer } from 'react-icons/si';
 import { FaAngleDoubleLeft } from 'react-icons/fa';
 import logo from '../../images/logo.png(1).webp';
-import { useState } from 'react';
+import {  useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
 import './Header.css';
-const Header = () => {
+
+const Header = ({ removeCookies }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   return (
     <header className='container mx-auto p-3 md:p-6  max-w-full  sticky top-0 z-50 '>
       <nav
@@ -105,6 +107,12 @@ const Header = () => {
               Contact
             </NavLink>
           </li>
+          <button
+            className='bg-red-color text-light-color  py-1 px-3  rounded'
+            onClick={removeCookies}
+          >
+            LogOut
+          </button>
         </ul>
         <button
           id='mob-btn'
