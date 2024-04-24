@@ -6,13 +6,14 @@ const Doctor = () => {
   const [doctors, setDoctors] = useState([]);
   const [filterDoctors, setFilterDoctors] = useState([]);
   const [valueInput, setValueInput] = useState('');
+  const KEY_DOCTORS = process.env.REACT_APP_DOCTORS;
    useEffect(() => {
 
         fetch(
-           'https://medat-api.onrender.com/api/doctors'
+           KEY_DOCTORS
          ).then(res => res.json()).then(data => setDoctors(data))
           
-   }, []);
+   }, [KEY_DOCTORS]);
 
   useEffect(() => {
     const flr = doctors.filter((doc) =>

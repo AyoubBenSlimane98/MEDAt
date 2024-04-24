@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-
+import { LiaEyeSlash, LiaEyeSolid } from 'react-icons/lia';
+import { MdErrorOutline } from 'react-icons/md';
+import './Login.css';
 function ChangePassword({ userId, onCancel }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [show, setShow] = useState(false);
+  const KEY_PASSWORD = process.env.REACT_APP_REGISTER;
+  const handelShowEye = () => {
+    setShow(!show);
+  };
   const handleChangePassword = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -20,7 +26,7 @@ function ChangePassword({ userId, onCancel }) {
       try {
        
       const response = await fetch(
-        `https://medat-api.onrender.com/api/register/${userId.userId}`,
+        `${KEY_PASSWORD}/${userId.userId}`,
         {
           method: 'PUT',
           headers: {
@@ -54,21 +60,51 @@ function ChangePassword({ userId, onCancel }) {
         >
           Change Password:
         </label>
-        <input
-          autoFocus
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder='New password'
-          className='border border-gray-400 w-full py-3 px-4 outline-none rounded-lg'
-        />
-        <input
-          type='password'
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder='Confirm password'
-          className='border border-gray-400 w-full py-3 px-4 outline-none rounded-lg'
-        />
+        <div className=' relative'>
+          <input
+            autoFocus
+            type={show ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='New password'
+            className={`border ${error ? 'border-red-color' : 'border-gray-400'}  w-full py-3 px-4 outline-none rounded-lg`}
+          />
+          {error ? (
+            <MdErrorOutline className='icon-md duration-300  text-2xl text-red-color' />
+          ) : show ? (
+            <LiaEyeSolid
+              className='icon-md duration-300 text-2xl cursor-pointer'
+              onClick={handelShowEye}
+            />
+          ) : (
+            <LiaEyeSlash
+              className={`${!password && 'hidden'} icon-md duration-300 text-2xl cursor-pointer`}
+              onClick={handelShowEye}
+            />
+          )}
+        </div>
+        <div className=' relative'>
+          <input
+            type={show ? 'text' : 'password'}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder='Confirm password'
+            className={`border ${error ? 'border-red-color' : 'border-gray-400'}  w-full py-3 px-4 outline-none rounded-lg`}
+          />
+          {error ? (
+            <MdErrorOutline className='icon-md duration-300  text-2xl text-red-color' />
+          ) : show?(
+            <LiaEyeSolid
+              className='icon-md duration-300 text-2xl cursor-pointer'
+              onClick={handelShowEye}
+            />
+          ) : (
+            <LiaEyeSlash
+              className={`${!confirmPassword && 'hidden'} icon-md duration-300 text-2xl cursor-pointer`}
+              onClick={handelShowEye}
+            />
+          )}
+        </div>
         {error && <p className='text-red-500'>{error}</p>}
         <div className='w-full flex justify-end gap-4 items-center'>
           <button

@@ -2,6 +2,7 @@ import React, {  useReducer } from 'react';
 import SelectAllDr from '../DrAll/SelectAllDr';
 
 const Information = ({ time, date }) => {
+  const KEY_APPOINTMENT = process.env.REACT_APP_APPOINTMENT;
   const initialState = {
     firstName: '',
     lastName: '',
@@ -89,8 +90,8 @@ const reducer = (state, action) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        'https://medat-api.onrender.com/api/appointments',
+      const response = await fetch(KEY_APPOINTMENT
+        ,
         {
           method: 'POST',
           headers: {

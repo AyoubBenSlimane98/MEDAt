@@ -32,6 +32,7 @@ const App = ({ removeCookies }) => {
             />
             <Route path='/doctor'>
               <Route
+                
                 index
                 element={<Doctor />}
               />

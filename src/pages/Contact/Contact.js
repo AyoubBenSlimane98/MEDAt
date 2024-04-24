@@ -37,7 +37,7 @@ const reducer = (state, action) => {
 
 const Contact = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const KEY_CONTACT = process.env.REACT_APP_CONTACT;
   const handleChange = (e) => {
     const { name, value } = e.target;
     let errorMessage = '';
@@ -72,7 +72,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://medat-api.onrender.com/api/contacts', {
+      const response = await fetch(KEY_CONTACT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

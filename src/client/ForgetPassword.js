@@ -6,15 +6,15 @@ function ForgetPassword({ onCancel }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const KEY_EMAIL = process.env.REACT_APP_VALIDATE_EMAIL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(
-        'https://medat-api.onrender.com/api/register/validate-email',
+      const response = await fetch(KEY_EMAIL
+        ,
         {
           method: 'POST',
           headers: {
@@ -31,7 +31,7 @@ function ForgetPassword({ onCancel }) {
         throw new Error('Email validation failed');
       }
     } catch (error) {
-      setError('Failed to validate email');
+      setError('Please, make sure your email is correct !');
     } finally {
       setLoading(false);
     }
@@ -59,8 +59,9 @@ function ForgetPassword({ onCancel }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder='info@gmail.com'
-              className='border border-gray-200 w-full py-2 px-4 outline-none rounded-lg mb-5'
+              className={`border ${!error ? 'border-gray-200' : 'border-red-color'}  w-full py-2 px-4 outline-none rounded-lg mb-5`}
             />
+            {error && <p className='text-red-color mb-2'>{error}</p>}
             <hr className='mb-3' />
             <div className='flex justify-end items-center gap-4'>
               <button

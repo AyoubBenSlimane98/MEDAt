@@ -6,6 +6,7 @@ import { LuCalendarClock } from 'react-icons/lu';
 import { BsHospital } from 'react-icons/bs';
 import { SiMinutemailer } from 'react-icons/si';
 import { FaAngleDoubleLeft } from 'react-icons/fa';
+import { LuLogOut } from 'react-icons/lu';
 import logo from '../../images/logo.png(1).webp';
 import {  useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
@@ -23,7 +24,7 @@ const Header = ({ removeCookies }) => {
         className={`flex justify-between items-center ${isMenuOpen ? ' hidden duration-300 ease-in-out' : ''}`}
       >
         {/* logo */}
-        <div className=''>
+        <div>
           <Link to='/'>
             <img
               src={logo}
@@ -196,6 +197,15 @@ const Header = ({ removeCookies }) => {
               <span className='leading-none'>Contact US</span>
             </NavLink>
           </div>
+
+            <button
+              className=' text-light-color bg-red-color flex items-center justify-center  gap-3   py-1 px-3  rounded absolute bottom-4 right-2  '
+              onClick={removeCookies}
+            >
+              <LuLogOut className='text-xl' />
+              LogOut
+            </button>
+          
         </div>
       )}
     </header>

@@ -1,7 +1,10 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import Select from './Select';
+import { IoCloseCircleOutline } from 'react-icons/io5';
 
-const Register = () => {
+const Register = ({ hiddenRegister }) => {
+  const KEY_REGISTER = process.env.REACT_APP_REGISTER
+  const [loading, setLoading] = useState(false);
   const months = [
     'January',
     'February',
@@ -75,7 +78,7 @@ const Register = () => {
     }
     if (name === 'password') {
       const passwordPattern =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%+-_/=*?]).{8,24}$/;
       if (!passwordPattern.test(value)) {
         errorMessage =
           'Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character !@#$%, and be between 8 and 24 characters long.';
@@ -87,14 +90,13 @@ const Register = () => {
         field: 'dateOfBirth',
         value: { ...state.dateOfBirth, [name]: value },
       });
-    } else { 
+    } else {
       dispatch({
         type: 'input',
         field: name,
         value: value,
       });
     }
-    
 
     if (errorMessage) {
       dispatch({
@@ -107,9 +109,10 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const response = await fetch(
-        'https://medat-api.onrender.com/api/register',
+      const response = await fetch(KEY_REGISTER
+        ,
         {
           method: 'POST',
           headers: {
@@ -121,10 +124,13 @@ const Register = () => {
 
       if (response.ok) {
         console.log('Registration successful');
-        console.log(state)
+        console.log(state);
+      } else {
+        throw new Error();
       }
     } catch (error) {
-      console.error('Error occurred while registering:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -148,9 +154,10 @@ const Register = () => {
         className='w-[460px] bg-light-color border border-gray-200 rounded-md shadow py-4 px-4 gap-4 flex flex-col justify-center'
         onSubmit={handleSubmit}
       >
-        <div>
+        <div className=' relative'>
           <h2 className='text-3xl text-center py-4'>Sign Up</h2>
           <span>It’s quick and easy.</span>
+          <IoCloseCircleOutline className=' absolute top-0 right-1 text-2xl ' onClick={hiddenRegister} />
         </div>
         <hr />
         <div className='flex items-center justify-center gap-3'>
@@ -260,9 +267,9 @@ const Register = () => {
             className={`outline-none  border-none rounded py-2 px-4 text-light-color text-center  w-40 
             ${!validateForm() ? 'bg-gray-300' : 'bg-green-light hover:bg-green-700 focus:bg-green-700'}
             `}
-            disabled={!validateForm()}
+            disabled={!validateForm() && loading}
           >
-            Sign Up
+            {loading && validateForm ? 'Sign Up ...' : 'Sing Up'}
           </button>
         </div>
       </form>
