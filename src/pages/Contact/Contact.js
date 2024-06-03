@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import MapComponent from '../../components/Map/MapComponent';
 import logo from '../../images/contactuspage.jpg';
 import './Contact.css';
 
@@ -7,6 +8,7 @@ const initialState = {
   lastName: '',
   email: '',
   message: '',
+  isDone : false ,
   errors: {
     firstName: '',
     lastName: '',
@@ -114,7 +116,8 @@ const Contact = () => {
           <h2 className='text-5xl md:text-8xl'>CONTACT US</h2>
         </div>
       </div>
-      <div className='flex flex-col-reverse items-center md:flex-row md:justify-around mb-10'>
+      <div className='flex flex-row-reverse items-center md:flex-row md:justify-around mb-10'>
+        <MapComponent />
         <form
           onSubmit={handleSubmit}
           className='flex flex-col p-4 sm:p-8 justify-center gap-y-6 border border-gray-200 mb-8 shadow w-[90%] sm:w-1/2'
@@ -123,33 +126,33 @@ const Contact = () => {
             <label htmlFor='firstName'>
               Full Name <span className='text-red-700'>*</span>
             </label>
-              <input
-                autoFocus
-                type='text'
-                name='firstName'
-                value={state.firstName}
-                onChange={handleChange}
-                placeholder='First Name'
-                className='border border-gray-400 px-2 py-1 outline-none'
-                required
-              />
-              {state.errors.firstName && (
-                <p className='text-red-color'>{state.errors.firstName}</p>
-              )}
-              <input
-                type='text'
-                name='lastName'
-                value={state.lastName}
-                onChange={handleChange}
-                placeholder='Last Name'
-                className='border border-gray-400 px-2 py-1 outline-none  flex-grow'
-                required
-              />
-              {state.errors.lastName && (
-                <p className='text-red-color'>{state.errors.lastName}</p>
-              )}
-            </div>
- 
+            <input
+              autoFocus
+              type='text'
+              name='firstName'
+              value={state.firstName}
+              onChange={handleChange}
+              placeholder='First Name'
+              className='border border-gray-400 px-2 py-1 outline-none'
+              required
+            />
+            {state.errors.firstName && (
+              <p className='text-red-color'>{state.errors.firstName}</p>
+            )}
+            <input
+              type='text'
+              name='lastName'
+              value={state.lastName}
+              onChange={handleChange}
+              placeholder='Last Name'
+              className='border border-gray-400 px-2 py-1 outline-none  flex-grow'
+              required
+            />
+            {state.errors.lastName && (
+              <p className='text-red-color'>{state.errors.lastName}</p>
+            )}
+          </div>
+
           <div className='flex flex-col gap-y-2'>
             <label htmlFor='email'>
               Email <span className='text-red-700'>*</span>
@@ -197,8 +200,7 @@ const Contact = () => {
             </button>
           </div>
         </form>
-        <div>
-        </div>
+        <div></div>
       </div>
     </div>
   );

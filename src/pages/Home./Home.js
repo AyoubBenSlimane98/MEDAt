@@ -2,12 +2,12 @@ import logo from '../../images/medicine.png';
 // import './Home.css';
 import TitleHom from '../../components/Titles/TitleHom';
 import Db from '../../DataBase/Db';
-
+import Video from '../../components/video/Video';
 import SliderActive from '../../components/sliderActive/SliderActive';
 import Clinic from '../../DataBase/ClinicDb';
 import CardCli from '../../components/CardCli/CardCli';
 import BtnHome from '../../components/btn-home/BtnHome';
-import Video from '../../components/video/Video';
+
 
 function Home() {
   const CardClinic = Clinic.map((item) => (

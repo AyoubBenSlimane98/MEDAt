@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 function Profile(props) {
   const params = useParams();
+  const url = process.env.REACT_APP_DOCTORS;
   const [users, setUsers] = useState([]);
   const [profil, setProfil] = useState([]);
   const search = params.profile.replaceAll('-', ' ');
   useEffect(() => {
-    fetch('https://medat-api.onrender.com/api/doctors')
+    fetch(url)
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);

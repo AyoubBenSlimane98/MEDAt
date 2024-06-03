@@ -4,7 +4,7 @@ import ContentProfile from '../ContentProfile/ContentProflie'
 import ProfileOfDoctor from '../profileOfDoctor/ProfileOfDoctor';
 
 const CardPro = ({ person }) => {
-
+       
   const styles = {
     classMain: 'mb-12',
     classHeader: 'text-2xl mb-2 font-normal',

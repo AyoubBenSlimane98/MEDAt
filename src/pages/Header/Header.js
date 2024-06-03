@@ -19,7 +19,7 @@ const Header = ({ removeCookies }) => {
   };
 
   return (
-    <header className='container mx-auto p-3 md:p-6  max-w-full  sticky top-0 z-50 '>
+    <header className='container mx-auto p-3 md:p-6  max-w-full  sticky top-0 z-50  bg-slate-200'>
       <nav
         className={`flex justify-between items-center ${isMenuOpen ? ' hidden duration-300 ease-in-out' : ''}`}
       >
