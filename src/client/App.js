@@ -19,14 +19,14 @@ import Physiotherapy from '../pages/clinic/Physiotherapy';
 import Podiatry from '../pages/clinic/Podiatry';
 import UrologyAndrology from '../pages/clinic/UrologyAndrology';
 
-const App = ({ removeCookies }) => {
+const App = () => {
   return (
-    <React.StrictMode>
+    <>
       <Router>
         <Routes>
           <Route
             path='/'
-            element={<Layout removeCookies={removeCookies} />}
+            element={<Layout />}
           >
             <Route
               path=''
@@ -103,7 +103,7 @@ const App = ({ removeCookies }) => {
           </Route>
         </Routes>
       </Router>
-    </React.StrictMode>
+    </>
   );
 };
 

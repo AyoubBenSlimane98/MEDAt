@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6d1cf95b.css",
+    "main.js": "/static/js/main.a3ac33f8.js",
+    "static/media/teamDoctors.jpg": "/static/media/teamDoctors.9dd157bd7e84038da0e8.jpg",
+    "static/media/6130551-hd_1920_1080_30fps.mp4": "/static/media/6130551-hd_1920_1080_30fps.00f9c6c49c1c59f41885.mp4",
+    "static/media/Podiatry.webp": "/static/media/Podiatry.d60b8805cca13fcdf16d.webp",
+    "static/media/contactuspage.jpg": "/static/media/contactuspage.a766463d71f4724b0ccd.jpg",
+    "static/media/medicine.png": "/static/media/medicine.e3d85974b9b5b8b73574.png",
+    "static/media/logo.png(1).webp": "/static/media/logo.png(1).02e86c44a30244383e38.webp",
+    "index.html": "/index.html",
+    "main.6d1cf95b.css.map": "/static/css/main.6d1cf95b.css.map",
+    "main.a3ac33f8.js.map": "/static/js/main.a3ac33f8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6d1cf95b.css",
+    "static/js/main.a3ac33f8.js"
+  ]
+}

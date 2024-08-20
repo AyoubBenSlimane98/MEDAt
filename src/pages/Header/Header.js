@@ -6,13 +6,13 @@ import { LuCalendarClock } from 'react-icons/lu';
 import { BsHospital } from 'react-icons/bs';
 import { SiMinutemailer } from 'react-icons/si';
 import { FaAngleDoubleLeft } from 'react-icons/fa';
-import { LuLogOut } from 'react-icons/lu';
+
 import logo from '../../images/logo.png(1).webp';
 import {  useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
 import './Header.css';
 
-const Header = ({ removeCookies }) => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -108,12 +108,7 @@ const Header = ({ removeCookies }) => {
               Contact
             </NavLink>
           </li>
-          <button
-            className='bg-red-color text-light-color  py-1 px-3  rounded'
-            onClick={removeCookies}
-          >
-            LogOut
-          </button>
+        
         </ul>
         <button
           id='mob-btn'
@@ -198,13 +193,7 @@ const Header = ({ removeCookies }) => {
             </NavLink>
           </div>
 
-            <button
-              className=' text-light-color bg-red-color flex items-center justify-center  gap-3   py-1 px-3  rounded absolute bottom-4 right-2  '
-              onClick={removeCookies}
-            >
-              <LuLogOut className='text-xl' />
-              LogOut
-            </button>
+           
           
         </div>
       )}
